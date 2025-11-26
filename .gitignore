@@ -1,0 +1,36 @@
+
+# Fichiers compilés et exécutables
+*.o
+*.obj
+*.exe
+*.out
+*.app
+bin/
+obj/
+
+# Dossiers de build CMake
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Dossiers de build Code::Blocks
+*.layout
+*.depend
+*.cbp.bak
+
+# Bibliothèques (SDL2, etc.)
+SDL2/
+include/
+
+# Dossiers IDE
+.idea/
+.vscode/
+*.suo
+*.user
+*.sln.docstates
+
+# Fichiers système
+.DS_Store
+Thumbs.db
