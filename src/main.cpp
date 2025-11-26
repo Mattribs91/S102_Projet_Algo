@@ -17,6 +17,7 @@ int main(int, char**) // Version special du main, ne pas modifier
   int position_y = 0;
 
   // ---CREATION DES IMAGES----
+  
   Image fond; //Creation image de fond
   try {
     fond = Image(moteur,"../assets/fond.png");
