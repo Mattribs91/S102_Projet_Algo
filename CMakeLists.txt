@@ -27,6 +27,9 @@ add_executable(Projet_Algo
         src/main.cpp
         src/Moteur.cpp
         src/Image.cpp
+        include/Personnage.h
+        src/Personnage.cpp
+        src/main.cpp
 )
 
 # --- ÉTAPE 3 : Spécifier les chemins d'en-tête ---
@@ -40,4 +43,11 @@ target_include_directories(Projet_Algo PRIVATE
 target_link_libraries(Projet_Algo PRIVATE
         ${SDL2_LIBRARY}
         ${SDL2_IMAGE_LIBRARY}
+)
+
+# --- ÉTAPE 5 : Copier les assets dans le répertoire de build ---
+add_custom_command(TARGET Projet_Algo POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/assets
+        $<TARGET_FILE_DIR:Projet_Algo>/assets
 )

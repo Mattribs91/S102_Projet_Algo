@@ -2,6 +2,7 @@
 
 #include "Moteur.h"
 #include "Image.h"
+#include "Personnage.h"
 
 using namespace std;
 
@@ -13,28 +14,23 @@ int main(int, char**) // Version special du main, ne pas modifier
   // TODO: charger images, creer personnages, etc.
 
   bool quitter = false;
-  bool ouvert = false;
-  int position_y = 0;
+  /*bool ouvert = false;
+  double position_y = 0;*/
 
   // ---CREATION DES IMAGES----
-  
+
   Image fond; //Creation image de fond
-  try {
-    fond = Image(moteur,"../assets/fond.png");
-  } catch (runtime_error) {
-    cerr << "Impossible de charger l'image" << endl;
-  }
+  //Image coffre_ferme;
+  //Image coffre_ouvert;
+  Image personnage_simple;
 
-  Image coffre_ferme; //Image coffre ferme
-  try {
-    coffre_ferme = Image(moteur,"../assets/coffre_ferme.png");
-  } catch (runtime_error) {
-    cerr << "Impossible de charger l'image" << endl;
-  }
+  Personnage personnage(0, 0, personnage_simple, 3); //Creation de l'objet personnage
 
-  Image coffre_ouvert; //Image coffre ouvert
   try {
-    coffre_ouvert = Image(moteur,"../assets/coffre_ouvert.png");
+    //coffre_ferme = Image(moteur,"assets/coffre_ferme.png");
+    //coffre_ouvert = Image(moteur,"assets/coffre_ouvert.png");
+    fond = Image(moteur,"assets/fond.png");
+    personnage_simple = Image(moteur,"assets/personnages.png");
   } catch (runtime_error) {
     cerr << "Impossible de charger l'image" << endl;
   }
@@ -54,11 +50,23 @@ int main(int, char**) // Version special du main, ne pas modifier
           quitter = true;
           break;
         // TODO: gerer les autres evenements
-        case ESPACE_APPUYE:
+        /*case ESPACE_APPUYE:
           ouvert = true;
           break;
         case ESPACE_RELACHE:
           ouvert = false;
+          break;*/
+        case HAUT_APPUYE:
+          personnage.regarderHaut();
+          break;
+        case DROITE_APPUYE:
+          personnage.regarderDroite();
+          break;
+        case BAS_APPUYE:
+          personnage.regarderBas();
+          break;
+        case GAUCHE_APPUYE:
+          personnage.regarderGauche();
           break;
         default:
           break;
@@ -74,16 +82,13 @@ int main(int, char**) // Version special du main, ne pas modifier
     moteur.initialiserRendu(); // efface ce qui avait ete affiche precedemment et reinitalise en ecran noir
 
     fond.dessiner(0, 0); //Affiche l'image de fond
+    personnage.dessiner(); //On dessine l'objet personnage
 
-    if (ouvert) {
-      coffre_ouvert.dessiner(0,position_y++); //Coffre ouvert si espace appuye
+    /*if (ouvert) {
+      coffre_ouvert.dessiner(0,position_y + 0.2); //Coffre ouvert si espace appuye
     } else {
-      coffre_ferme.dessiner(0,position_y++); //Coffre ferme si espace relache
-    }
-
-    if (coffre_ferme > HAUTEUR_FENETRE) {
-      position_y = 0;
-    }
+      coffre_ferme.dessiner(0,position_y + 0.2); //Coffre ferme si espace relache
+    }*/
 
     // TODO: afficher vos personnages, objets, etc.
 
