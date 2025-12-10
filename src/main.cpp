@@ -6,10 +6,10 @@
 
 using namespace std;
 
-int main(int, char**) // Version special du main, ne pas modifier
+int main(int, char**) // Version speciale du main, ne pas modifier
 {
   // Initialisation du jeu
-  Moteur moteur("Mon super jeu vidéo");
+  Moteur moteur("Jeu vidéo relou à faire");
 
   // TODO: charger images, creer personnages, etc.
 
@@ -19,12 +19,9 @@ int main(int, char**) // Version special du main, ne pas modifier
 
   // ---CREATION DES IMAGES----
 
-  Image fond; //Creation image de fond
   //Image coffre_ferme;
   //Image coffre_ouvert;
-  Image personnage_simple;
-
-  Personnage personnage(0, 0, personnage_simple, 3); //Creation de l'objet personnage
+  Image personnage_simple, fond;
 
   try {
     //coffre_ferme = Image(moteur,"assets/coffre_ferme.png");
@@ -34,6 +31,10 @@ int main(int, char**) // Version special du main, ne pas modifier
   } catch (runtime_error) {
     cerr << "Impossible de charger l'image" << endl;
   }
+
+  Personnage personnage(0, 0, personnage_simple, BAS, 0, 0); //Creation de l'objet personnage
+  Personnage ennemi1(5 * TAILLE_CASE, 0, personnage_simple, BAS, 2, 1);
+  Personnage ennemi2(0, 5 * TAILLE_CASE, personnage_simple, BAS, 3, 0);
 
   // Boucle de jeu, appelee a chaque fois que l'ecran doit etre mis a jour
   // (en general, 60 fois par seconde)
@@ -83,6 +84,8 @@ int main(int, char**) // Version special du main, ne pas modifier
 
     fond.dessiner(0, 0); //Affiche l'image de fond
     personnage.dessiner(); //On dessine l'objet personnage
+    ennemi1.dessiner();
+    ennemi2.dessiner();
 
     /*if (ouvert) {
       coffre_ouvert.dessiner(0,position_y + 0.2); //Coffre ouvert si espace appuye

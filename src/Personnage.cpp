@@ -13,38 +13,40 @@ Personnage::Personnage() {
     _direction = 1;
 }
 
-Personnage::Personnage(int x, int y, Image image, int direction) {
+Personnage::Personnage(int x, int y, Image image, int direction, int skin_x, int skin_y) {
     _position_x = x;
     _position_y = y;
     _image =  image;
     _direction = direction;
+    _skin_x = (skin_x * 3) + 1;
+    _skin_y = skin_y * 4;
 }
 
 void Personnage::dessiner() const {
     switch (_direction) {
-        case 1: _image.dessiner(0, 0, 4 * TAILLE_CASE, 3 * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
+        case HAUT: _image.dessiner(_position_x, _position_y, _skin_x * TAILLE_CASE, (_skin_y + 3) * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
             break;
-        case 2: _image.dessiner(0, 0, 4 * TAILLE_CASE, 2 * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
+        case DROITE: _image.dessiner(_position_x, _position_y, _skin_x * TAILLE_CASE, (_skin_y + 2) * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
             break;
-        case 3: _image.dessiner(0, 0, 4 * TAILLE_CASE, 0 * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
+        case BAS: _image.dessiner(_position_x, _position_y, _skin_x * TAILLE_CASE, _skin_y * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
             break;
-        case 4: _image.dessiner(0, 0, 4 * TAILLE_CASE, 1 * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
+        case GAUCHE: _image.dessiner(_position_x, _position_y, _skin_x * TAILLE_CASE, (_skin_y + 1) * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
             break;
     }
 }
 
 void Personnage::regarderHaut() {
-    _direction = 1;
+    _direction = HAUT;
 }
 
 void Personnage::regarderBas() {
-    _direction = 3;
+    _direction = BAS;
 }
 
 void Personnage::regarderDroite() {
-    _direction = 2;
+    _direction = DROITE;
 }
 
 void Personnage::regarderGauche() {
-    _direction = 4;
+    _direction = GAUCHE;
 }
