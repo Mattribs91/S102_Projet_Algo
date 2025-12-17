@@ -22,7 +22,6 @@ Makefile
 
 # Bibliothèques (SDL2, etc.)
 SDL2/
-include/
 
 # Dossiers IDE
 .idea/
