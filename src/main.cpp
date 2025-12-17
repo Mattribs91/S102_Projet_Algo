@@ -21,13 +21,14 @@ int main(int, char **) // Version speciale du main, ne pas modifier
 
   // Image coffre_ferme;
   // Image coffre_ouvert;
-  Image personnage_simple, fond;
+  Image objets, fond, personnage_simple;
 
   try {
     // coffre_ferme = Image(moteur,"assets/coffre_ferme.png");
     // coffre_ouvert = Image(moteur,"assets/coffre_ouvert.png");
     fond = Image(moteur, "assets/fond.png");
     personnage_simple = Image(moteur, "assets/personnages.png");
+    objets = Image(moteur, "assets/obetjs.png");
   } catch (runtime_error) {
     cerr << "Impossible de charger l'image" << endl;
   }
@@ -75,18 +76,20 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     }
     // II. Mise à jour de l'état du jeu
 
-    // TODO: faire bouger vos personnages, etc.
+    if (moteur.animationsAmettreAjour()) {
+      ennemi1.avancer();
+      ennemi2.avancer();
+    }
+
+    if (personnage.touche(ennemi1) || personnage.touche(ennemi2)) {
+      cout << "trop nul t mort" << endl;
+      moteur.attendre(5);
+      quitter = true;
+    }
 
     // III. Generation de l'image à afficher
     moteur.initialiserRendu(); // efface ce qui avait ete affiche precedemment
                                // et reinitalise en ecran noir
-
-    fond.dessiner(0, 0);   // Affiche l'image de fond
-    personnage.dessiner(); // On dessine l'objet personnage
-    ennemi1.avancer();
-    ennemi2.avancer();
-    ennemi1.dessiner();
-    ennemi2.dessiner();
 
     /*if (ouvert) {
       coffre_ouvert.dessiner(0,position_y + 0.2); //Coffre ouvert si espace
@@ -95,6 +98,10 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     }*/
 
     // TODO: afficher vos personnages, objets, etc.
+    fond.dessiner(0, 0);   // Affiche l'image de fond
+    personnage.dessiner(); // On dessine l'objet personnage
+    ennemi1.dessiner();
+    ennemi2.dessiner();
 
     /*
       Affiche l'image en se cadencant sur la frequence de

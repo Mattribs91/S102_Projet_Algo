@@ -3,6 +3,7 @@
 //
 
 #include "Personnage.h"
+#include <fstream>
 
 using namespace std;
 
@@ -135,6 +136,22 @@ Direction Personnage::getDirection() const {
   return _direction;
 }
 
+int Personnage::getPositionX() const {
+  return _position_x;
+}
+
+int Personnage::getPositionY() const {
+  return _position_y;
+}
+
+int Ennemi::getPositionX() const {
+  return _perso.getPositionX();
+}
+
+int Ennemi::getPositionY() const {
+  return _perso.getPositionY();
+}
+
 void Avatar::allerGauche() {
   _perso.regarderGauche();
   if (_perso.peutBougerVers(GAUCHE)) {
@@ -163,3 +180,38 @@ void Personnage::regarderBas() { _direction = BAS; }
 void Personnage::regarderDroite() { _direction = DROITE; }
 
 void Personnage::regarderGauche() { _direction = GAUCHE; }
+
+bool Avatar::touche(Ennemi ennemi) const {
+  if ((_perso.getPositionX() == ennemi.getPositionX()) && (_perso.getPositionY() == ennemi.getPositionY())) {
+    return true;
+  }
+  return false;
+}
+
+
+//SEANCE 4 TUILES
+Tuile::Tuile(string nom, int x, int y, string propriete) {
+  _nom = nom;
+  _x = x;
+  _y = y;
+  _propriete = propriete;
+}
+
+Dictionnaire::Dictionnaire(string nom) {
+  ifstream fichier(nom);
+  int nb_tuiles;
+  string nomTuile, propriete;
+  int x, y;
+  fichier >> nb_tuiles;
+
+  for (int i = 0; i < nb_tuiles; i++) {
+    fichier >> nomTuile;
+    fichier >> x;
+    fichier >> y;
+    fichier >> propriete;
+  }
+}
+
+void Tuile::afficher() const {
+  cout << _nom << ": " << "x = " << _x << ", " << "y = " << _y << ", " << _propriete << endl;
+}
