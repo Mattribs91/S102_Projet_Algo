@@ -8,7 +8,7 @@
 bin/
 obj/
 
-# Dossiers de build CMake
+# Dossiers de build CMake.
 cmake-build-*/
 CMakeFiles/
 CMakeLists.txt
