@@ -28,7 +28,7 @@ public:
 
   // Dessine une partie rectangulaire de l'image aux coordonnees voulues
   void dessiner
-    (int x, int y, // coordonnees a l'ecran
+    (int x, int y, // coordonnees a l'écran
      int x_selection, int y_selection, // coordonnees du rectangle dans l'image
      int largeur_selection, // largeur du rectangle dans l'image
      int hauteur_selection  // hauteur du rectangle dans l'image

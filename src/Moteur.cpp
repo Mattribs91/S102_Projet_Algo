@@ -40,14 +40,14 @@ Moteur::~Moteur()
   SDL_Quit ();
 }
 
-void Moteur::initialiserRendu()
+void Moteur::initialiserRendu() const
 {
   // On remplie la fenetre avec du noir
   SDL_SetRenderDrawColor (_renderer, 0, 0, 0, 255);
   SDL_RenderClear (_renderer);
 }
 
-void Moteur::finaliserRendu()
+void Moteur::finaliserRendu() const
 {
   SDL_RenderPresent (_renderer);
 }
@@ -111,7 +111,7 @@ void Moteur::attendre(double secondes) const
   SDL_Delay(int(secondes * 1000));
 }
 
-SDL_Renderer* Moteur::getRenderer()
+SDL_Renderer* Moteur::getRenderer() const
 {
   return _renderer;
 }

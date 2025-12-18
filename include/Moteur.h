@@ -7,8 +7,8 @@
 
 const int TAILLE_CASE = 16; // Cases de 16 pixels de cote
 
-const int NB_CASE_LARGEUR = 10;
-const int NB_CASE_HAUTEUR = 8;
+const int NB_CASE_LARGEUR = 15;
+const int NB_CASE_HAUTEUR = 13;
 
 const int LARGEUR_FENETRE = TAILLE_CASE * NB_CASE_LARGEUR;
 const int HAUTEUR_FENETRE = TAILLE_CASE * NB_CASE_HAUTEUR;
@@ -58,10 +58,10 @@ public:
   ~Moteur();
 
   // Initalise l'image par un ecran noir
-  void initialiserRendu();
+  void initialiserRendu() const;
 
   // Finalise l'image et l'envoie a la carte graphique pour affichage sur l'ecran
-  void finaliserRendu();
+  void finaliserRendu() const;
 
   // Renvoie le dernier evenement recu (AUCUN si rien n'est recu)
   Evenement evenementRecu() const;
@@ -75,7 +75,7 @@ public:
   void attendre(double secondes) const;
 
   // (Pour un usage interne, vous n'aurez jamais besoin de cette methode.)
-  SDL_Renderer* getRenderer();
+  SDL_Renderer* getRenderer() const;
 };
 
 #endif // MOTEUR_H
