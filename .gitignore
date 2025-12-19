@@ -11,7 +11,7 @@ obj/
 # Dossiers de build CMake.
 cmake-build-*/
 CMakeFiles/
-CMakeLists.txt
+# CMakeLists.txt
 CMakeCache.txt
 cmake_install.cmake
 Makefile
