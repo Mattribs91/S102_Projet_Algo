@@ -41,6 +41,7 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     personnage_simple = Image(moteur, "assets/personnages.png");
     dictionnaire = Dictionnaire("assets/dictionnaire.txt"); //chargement du dictionnaire
     gagne = Image(moteur, "assets/bravo.png");
+    perdu = Image(moteur, "assets/papel.png");
   } catch (const runtime_error&) {
     cerr << "Impossible de charger l'image" << endl;
   }
@@ -108,6 +109,7 @@ int main(int, char **) // Version speciale du main, ne pas modifier
 
     if (personnage.touche(ennemi1) || personnage.touche(ennemi2)) {
       cout << "\ntrop nul t mort" << endl;
+      perdu.dessiner(2 * TAILLE_CASE, 3 * TAILLE_CASE);
       moteur.attendre(3);
       quitter = true;
     }
@@ -132,7 +134,7 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     //bloc.dessiner();
 
     if (niveau.gagne()) {
-      gagne.dessiner(4.5 * TAILLE_CASE, 5.5 * TAILLE_CASE);
+      gagne.dessiner(2 * TAILLE_CASE, 3 * TAILLE_CASE);
     }
 
     /*

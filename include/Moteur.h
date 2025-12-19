@@ -7,8 +7,8 @@
 
 const int TAILLE_CASE = 16; // Cases de 16 pixels de cote
 
-const int NB_CASE_LARGEUR = 15;
-const int NB_CASE_HAUTEUR = 13;
+const int NB_CASE_LARGEUR = 10;
+const int NB_CASE_HAUTEUR = 8;
 
 const int LARGEUR_FENETRE = TAILLE_CASE * NB_CASE_LARGEUR;
 const int HAUTEUR_FENETRE = TAILLE_CASE * NB_CASE_HAUTEUR;
@@ -52,7 +52,7 @@ public:
   //    soit une grille de 10x8 cases de 16 pixels de côté
   // L'argument FPS permet de regler la vitesse des animations
   // (8 FPS = 8 images par seconde)
-  Moteur(const std::string& nomDuJeu, int fps = 8);
+  Moteur(const std::string& nomDuJeu, int fps = 3);
 
   // Destructeur qui ferme le moteur et libere la memoire
   ~Moteur();
