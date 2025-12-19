@@ -7,6 +7,7 @@
 *.app
 bin/
 obj/
+build/
 
 # Dossiers de build CMake.
 cmake-build-*/
@@ -34,3 +35,6 @@ SDL2/
 # Fichiers système
 .DS_Store
 Thumbs.db
+
+Projet_Algo
+s102.cbp
