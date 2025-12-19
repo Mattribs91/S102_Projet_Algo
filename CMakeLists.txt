@@ -105,3 +105,4 @@ add_custom_command(TARGET Projet_Algo POST_BUILD
     ${CMAKE_SOURCE_DIR}/assets
     $<TARGET_FILE_DIR:Projet_Algo>/assets
 )
+#
