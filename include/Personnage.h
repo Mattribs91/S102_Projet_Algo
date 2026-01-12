@@ -32,7 +32,7 @@ public:
   void regarderDroite();
   void regarderGauche();
   void deplacer(int dx, int dy);
-  bool peutBougerVers(Direction direction, const Niveau &niveau) const;
+  bool peutBougerVers(const Direction& direction, const Niveau &niveau) const;
   Direction getDirection() const;
   //void inverserDirection(); plus besoin car mouvements randoms
 
@@ -48,7 +48,7 @@ private:
   Personnage _perso;
 
 public:
-  Ennemi(int position_x, int position_y, const Image &image, Direction direction, Skin skin);
+  Ennemi(int position_x, int position_y, const Image &image, const Direction& direction, Skin skin);
 
   void dessiner() const;
   void avancer(const Niveau &niveau);

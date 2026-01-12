@@ -58,10 +58,10 @@ public:
   ~Moteur();
 
   // Initalise l'image par un ecran noir
-  void initialiserRendu() const;
+  void initialiserRendu();
 
   // Finalise l'image et l'envoie a la carte graphique pour affichage sur l'ecran
-  void finaliserRendu() const;
+  void finaliserRendu();
 
   // Renvoie le dernier evenement recu (AUCUN si rien n'est recu)
   Evenement evenementRecu() const;
@@ -75,7 +75,7 @@ public:
   void attendre(double secondes) const;
 
   // (Pour un usage interne, vous n'aurez jamais besoin de cette methode.)
-  SDL_Renderer* getRenderer() const;
+  SDL_Renderer* getRenderer();
 };
 
 #endif // MOTEUR_H

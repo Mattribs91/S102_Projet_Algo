@@ -1,11 +1,9 @@
-#include <vector>
-
+#include "Dictionnaire.h"
 #include "Image.h"
 #include "Moteur.h"
+#include "Niveau.h"
 #include "Personnage.h"
 #include "Tuile.h"
-#include "Dictionnaire.h"
-#include "Niveau.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -14,10 +12,10 @@ using namespace std;
 
 int main(int, char **) // Version speciale du main, ne pas modifier
 {
-  srand(time(NULL)); // sert a changer le pattern des ennemis a chaque lancement
+  srand(time(nullptr)); // sert a changer le pattern des ennemis a chaque lancement
 
   // Initialisation du jeu
-  Moteur moteur("Jeu vidéo relou à faire");
+  Moteur moteur("Je ne sais pas");
 
   // TODO: charger images, creer personnages, etc.
 
@@ -32,21 +30,22 @@ int main(int, char **) // Version speciale du main, ne pas modifier
   Image objets, fond, personnage_simple, gagne, perdu;
   Dictionnaire dictionnaire;
 
-  //on essaye de charger les images
+  // on essaye de charger les images
   try {
     // coffre_ferme = Image (moteur,"assets/coffre_ferme.png") ;
     // coffre_ouvert = Image (moteur,"assets/coffre_ouvert.png") ;
-    objets = Image (moteur, "assets/objets.png");
-    //fond = Image(moteur, "assets/fond.png");
+    objets = Image(moteur, "assets/objets.png");
+    // fond = Image(moteur, "assets/fond.png");
     personnage_simple = Image(moteur, "assets/personnages.png");
-    dictionnaire = Dictionnaire("assets/dictionnaire.txt"); //chargement du dictionnaire
+    dictionnaire =
+        Dictionnaire("assets/dictionnaire.txt"); // chargement du dictionnaire
     gagne = Image(moteur, "assets/bravo.png");
-    perdu = Image(moteur, "assets/papel.png");
-  } catch (const runtime_error&) {
+    perdu = Image(moteur, "assets/gameover.png");
+  } catch (const runtime_error &) {
     cerr << "Impossible de charger l'image" << endl;
   }
 
-  dictionnaire.afficher(); //affichage du dictionnaire
+  dictionnaire.afficher(); // affichage du dictionnaire
 
   Tuile resultat;
   if (dictionnaire.recherche("Arbre_1", resultat)) {
@@ -56,13 +55,18 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     cout << "\nfalse" << endl;
   }
 
-  //Objet bloc(objets, "Puits", dictionnaire, 1, 0);
+  // Objet bloc(objets, "Puits", dictionnaire, 1, 0);
 
   Niveau niveau(objets, "assets/niveau.txt", dictionnaire);
 
-  Avatar personnage(1, 2, personnage_simple, BAS, NU); // Creation de l'objet personnage
-  Ennemi ennemi1(1 + rand() % (NB_CASE_LARGEUR - 2), 1 + rand() % (NB_CASE_HAUTEUR - 2), personnage_simple, BAS, GHOST);
-  Ennemi ennemi2(1 + rand() % (NB_CASE_LARGEUR - 2), 1 + rand() % (NB_CASE_HAUTEUR - 2), personnage_simple, DROITE, LARAIGNEE);
+  Avatar personnage(1, 2, personnage_simple, BAS,
+                    NU); // Creation de l'objet personnage
+  Ennemi ennemi1(1 + rand() % (NB_CASE_LARGEUR - 2),
+                 1 + rand() % (NB_CASE_HAUTEUR - 2), personnage_simple, BAS,
+                 GHOST);
+  Ennemi ennemi2(1 + rand() % (NB_CASE_LARGEUR - 2),
+                 1 + rand() % (NB_CASE_HAUTEUR - 2), personnage_simple, DROITE,
+                 LARAIGNEE);
 
   // Boucle de jeu, appelee à chaque fois que l'écran doit etre mis à jour
   // (en general, 60 fois par seconde)
@@ -107,31 +111,21 @@ int main(int, char **) // Version speciale du main, ne pas modifier
       ennemi2.avancer(niveau);
     }
 
-    if (personnage.touche(ennemi1) || personnage.touche(ennemi2)) {
-      cout << "\ntrop nul t mort" << endl;
-      perdu.dessiner(2 * TAILLE_CASE, 3 * TAILLE_CASE);
-      moteur.attendre(3);
-      quitter = true;
-    }
-
     // III. Generation de l'image à afficher
     moteur.initialiserRendu(); // efface ce qui avait ete affiche precedemment
                                // et initialise en ecran noir
-
-    /*if (ouvert) {
-      coffre_ouvert.dessiner(0,position_y + 0.2); //Coffre ouvert si espace
-    appuye } else { coffre_ferme.dessiner(0,position_y + 0.2); //Coffre ferme si
-    espace relache
-    }*/
-
     // TODO: afficher vos personnages, objets, etc.
-    //fond.dessiner(0, 0);   // Affiche l'image de fond
+    // fond.dessiner(0, 0);   // Affiche l'image de fond
     niveau.dessiner();
     personnage.dessiner(); // On dessine l'objet personnage
     ennemi1.dessiner();
     ennemi2.dessiner();
 
-    //bloc.dessiner();
+    if (personnage.touche(ennemi1) || personnage.touche(ennemi2)) {
+      perdu.dessiner(2 * TAILLE_CASE, 3 * TAILLE_CASE);
+    }
+
+    // bloc.dessiner();
 
     if (niveau.gagne()) {
       gagne.dessiner(2 * TAILLE_CASE, 3 * TAILLE_CASE);
@@ -146,8 +140,14 @@ int main(int, char **) // Version speciale du main, ne pas modifier
     */
     moteur.finaliserRendu();
 
+    if (personnage.touche(ennemi1) || personnage.touche(ennemi2)) {
+      cout << "\nGame Over" << endl;
+      moteur.attendre(3);
+      quitter = true;
+    }
+
     if (niveau.gagne()) {
-      cout << "t'as gagne bro" << endl;
+      cout << "You won" << endl;
       moteur.attendre(3);
       quitter = true;
     }

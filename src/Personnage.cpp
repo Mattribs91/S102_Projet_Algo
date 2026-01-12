@@ -77,7 +77,7 @@ Avatar::Avatar(const int position_x, const int position_y, const Image &image, c
 }
 
 //constructeur d'ennemi
-Ennemi::Ennemi(const int position_x, const int position_y, const Image &image, const Direction direction, Skin skin) {
+Ennemi::Ennemi(const int position_x, const int position_y, const Image &image, const Direction& direction, Skin skin) {
   _perso = Personnage(position_x, position_y, image, direction, skin);
 }
 
@@ -116,7 +116,7 @@ void Personnage::deplacer(const int dx, const int dy) {
 }
 
 // Méthode pour vérifier si le perso peut bouger dans la direction actuelle
-bool Personnage::peutBougerVers(const Direction direction, const Niveau &niveau) const {
+bool Personnage::peutBougerVers(const Direction& direction, const Niveau &niveau) const {
   if (direction == DROITE && _position_x < LARGEUR_FENETRE - TAILLE_CASE && niveau.caseEstLibre(_position_x + TAILLE_CASE, _position_y)) {
     return true;
   }
